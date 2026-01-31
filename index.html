@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" class="box-border">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="assets/icons/archive-fill.svg" type="image/x-icon">
+    <title>Archive [698FD720]</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="h-screen overflow-hidden font-mono">
+    <main class="bg-gray-950 flex p-4 md:p-12 min-h-screen">
+        <div class="bg-neutral-800 border border-neutral-700 m-auto w-full md:w-4xl h-140 rounded-none md:rounded-lg overflow-hidden">
+            <div class="h-full flex flex-col justify-between">
+                <!-- HEADER -->
+                <div class="flex items-center justify-end gap-4 px-4 py-2 bg-neutral-900 text-neutral-400">
+                    <!-- SORT SELECTION -->
+                    <div class="relative text-xs">
+                        <details class="group">
+                            <summary class="flex items-center gap-3 cursor-pointer select-none px-3 py-2 border border-neutral-400 rounded text-neutral-300 hover:bg-neutral-800">
+                                <div class="flex items-center gap-1">
+                                    <i class="ri-sort-asc icon icon-sm"></i>
+                                    <span>Sort</span>
+                                </div>
+                                <i class="ri-arrow-down-s-line icon icon-sm transition group-open:rotate-180"></i>
+                            </summary>
+
+                            <!-- Dropdown -->
+                            <div class="absolute left-0 mt-1 w-48 bg-neutral-900 border border-neutral-700 rounded shadow-lg z-50">
+                                <!-- Sort by -->
+                                <div class="px-3 py-2 text-neutral-400 text-[11px] uppercase">
+                                    Sort by
+                                </div>
+
+                                <label class="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-neutral-800">
+                                    <input type="radio" name="sort_by" value="name" class="sr-only peer" checked>
+                                    <i class="ri-check-line icon icon-sm peer-checked:opacity-100 opacity-0"></i>
+                                    <span>Name</span>
+                                </label>
+
+                                <label class="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-neutral-800">
+                                    <input type="radio" name="sort_by" value="size" class="sr-only peer">
+                                    <i class="ri-check-line icon icon-sm peer-checked:opacity-100 opacity-0"></i>
+                                    <span>Size</span>
+                                </label>
+
+                                <label class="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-neutral-800">
+                                    <input type="radio" name="sort_by" value="created_at" class="sr-only peer">
+                                    <i class="ri-check-line icon icon-sm peer-checked:opacity-100 opacity-0"></i>
+                                    <span>Created at</span>
+                                </label>
+
+                                <div class="border-t border-neutral-700 my-1"></div>
+
+                                <!-- Order -->
+                                <div class="px-3 py-2 text-neutral-400 text-[11px] uppercase">
+                                    Order
+                                </div>
+
+                                <label class="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-neutral-800">
+                                    <input type="radio" name="sort_order" value="asc" class="sr-only peer" checked>
+                                    <i class="ri-check-line icon icon-sm peer-checked:opacity-100 opacity-0"></i>
+                                    <span>Ascending</span>
+                                </label>
+
+                                <label class="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-neutral-800">
+                                    <input type="radio" name="sort_order" value="desc" class="sr-only peer">
+                                    <i class="ri-check-line icon icon-sm peer-checked:opacity-100 opacity-0"></i>
+                                    <span>Descending</span>
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- VIEW SELECTION -->
+                    <div>
+                        <ul class="flex text-xs">
+                            <li>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="view" value="icons" class="sr-only peer" checked>
+                                    <span class="flex items-center justify-center p-2 border border-neutral-400
+                                                peer-checked:bg-neutral-800 hover:bg-neutral-800 peer-checked:text-white rounded-l">
+                                        <i class="ri-image-line icon icon-sm"></i>
+                                    </span>
+                                </label>
+                            </li>
+
+                            <li>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="view" value="details" class="sr-only peer">
+                                    <span class="flex items-center justify-center p-2 border border-neutral-400
+                                                peer-checked:bg-neutral-800 hover:bg-neutral-800 peer-checked:text-white rounded-r">
+                                        <i class="ri-list-check icon icon-sm"></i>
+                                    </span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FOLDERS AREA -->
+                <div class="flex flex-wrap justify-center sm:justify-start h-full gap-4 text-neutral-300 p-4 content-start">
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="excerpt"
+                        data-file="excerpt.tiff"
+                        tabindex="0"
+                        role="button">
+                        <div class="excerpt-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-file-3-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    excerpt.tiff
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="foreword"
+                        data-file="foreword.md"
+                        tabindex="0"
+                        role="button">
+                        <div class="foreword-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-file-text-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    foreword.md
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="interval"
+                        data-file="interval.pdf"
+                        tabindex="0"
+                        role="button">
+                        <div class="interval-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer opacity-30">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-file-damage-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    interval.pdf
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="margin"
+                        data-file="margin.jpg"
+                        tabindex="0"
+                        role="button">
+                        <div class="margin-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-file-image-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    margin.jpg
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="postscript"
+                        data-file="postscript.txt"
+                        tabindex="0"
+                        role="button">
+                        <div class="postscript-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer opacity-30">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-lock-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    postscript.txt
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="reference"
+                        data-file="reference.png"
+                        tabindex="0"
+                        role="button">
+                        <div class="reference-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer opacity-30">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-lock-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    reference.png
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="desktop-icon h-fit rounded select-none duration-200"
+                        id="utility"
+                        data-file="utility.exe"
+                        tabindex="0"
+                        role="button">
+                        <div class="utility-file-container w-26 px-2 py-3 hover:bg-neutral-400/10 duration-200 rounded cursor-pointer opacity-30">
+                            <div class="flex flex-col items-center gap-1">
+                                <i class="icon icon-lg ri-lock-line"></i>
+                                <p class="w-full break-words text-sm text-center">
+                                    utility.exe
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-between bg-neutral-900 border-t border-neutral-700 text-neutral-300">
+                    <!-- DIALOG AREA -->
+                    <div class="dialog-container space-y-1 w-full h-50 overflow-y-auto px-4 py-2">
+                        
+                    </div>
+                    
+                    <!-- INPUT FIELD -->
+                    <div class="flex gap-2 bg-neutral-900 border-t border-neutral-700 px-4 py-2">
+                        <p>C:\User\Admin></p>
+                        <input class="w-full focus:outline-none focus:ring-0 focus:shadow-none placeholder:italic text-green-500" 
+                            type="text" name="text_field" id="text_field" autocomplete="off" placeholder="type here">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="file-modal" class="flex fixed inset-0 p-4 bg-black/40 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-neutral-900 border border-neutral-700 w-full md:w-3xl max-h-[80vh] text-neutral-300 rounded flex flex-col relative">
+            <div class="flex justify-between items-center px-4 py-2 border-b border-neutral-700 text-sm shrink-0">
+                <span id="file-title"></span>
+                <button id="close-modal" class="text-neutral-400 hover:text-white cursor-pointer duration-200">
+                    <i class="icon icon-md ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto">
+                <div id="converter-view" class="flex flex-col gap-4 hidden">
+                    <div class="flex items-end justify-center gap-4 px-4 py-12 border-b border-neutral-700">
+                        <div class="flex flex-col gap-1">
+                            <label for="hexadecimal" class="text-sm">Hexadecimal (H)</label>
+                            <input
+                                id="hexadecimal"
+                                type="text"
+                                autocomplete="off"
+                                class="w-full text-green-500 rounded border border-neutral-700 px-2 py-1"
+                            >
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="decimal" class="text-sm">Decimal (D)</label>
+                            <input
+                                id="decimal"
+                                type="number"
+                                placeholder="13657338"
+                                autocomplete="off"
+                                class="w-full text-green-500 rounded border border-neutral-700 px-2 py-1"
+                            >
+                        </div>
+
+                        <button
+                            id="convert-btn"
+                            class="border border-neutral-700 hover:bg-neutral-800 duration-200 px-4 py-1 rounded"
+                        >
+                            Convert
+                        </button>
+                    </div>
+
+                    <div class="flex justify-between gap-4 px-4 py-12">
+                        <div class="flex items-start flex-1 flex-col gap-8">
+                            <div class="flex items-end gap-4">
+                                <div class="flex flex-col gap-1 flex-1 relative">
+                                    <label for="hexcodes" class="text-sm">Codes</label>
+                                    <input
+                                        id="hexcodes"
+                                        type="text"
+                                        autocomplete="off"
+                                        class="w-full text-green-500 rounded border border-neutral-700 px-2 py-1"
+                                    >
+                                    <p id="hex-error" class="absolute -bottom-5 left-0 text-xs text-rose-500"></p>
+                                </div>
+
+                                <button
+                                    id="check-btn"
+                                    class="border border-neutral-700 hover:bg-neutral-800 duration-200 px-4 py-1 rounded"
+                                >
+                                    Check
+                                </button>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4 class="text-sm font-semibold">Validated:</h4>
+                                <div class="flex flex-wrap gap-2 text-sm validated-container">
+                                    <p class="rounded bg-neutral-800 px-3 py-1">None</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-1 justify-center">
+                            <svg viewBox="0 0 1100 1200" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-40">
+                                <rect x="200" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="300" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="400" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="600" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="700" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="800" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="100" y="100" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="200" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="300" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="400" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="500" y="100" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="600" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="700" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="800" y="100" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="900" y="100" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="100" y="200" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="200" y="200" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="300" y="200" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="400" y="200" width="100" height="100" data-color="D064FA" fill="#262626"/>
+                                <rect x="500" y="200" width="100" height="100" data-color="D064FA" fill="#262626"/>
+                                <rect x="600" y="200" width="100" height="100" data-color="D064FA" fill="#262626"/>
+                                <rect x="700" y="200" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="800" y="200" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="900" y="200" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect y="300" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="100" y="300" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="200" y="300" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="300" y="300" width="100" height="100" data-color="F896FD" fill="#262626"/>
+                                <rect x="400" y="300" width="100" height="100" data-color="F1D25E" fill="transparent"/>
+                                <rect x="500" y="300" width="100" height="100" data-color="F1D25E" fill="transparent"/>
+                                <rect x="600" y="300" width="100" height="100" data-color="F1D25E" fill="transparent"/>
+                                <rect x="700" y="300" width="100" height="100" data-color="F896FD" fill="#262626"/>
+                                <rect x="800" y="300" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="900" y="300" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="1000" y="300" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect y="400" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="100" y="400" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="200" y="400" width="100" height="100" data-color="D064FA" fill="#262626"/>
+                                <rect x="300" y="400" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="400" y="400" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="500" y="400" width="100" height="100" data-color="F1D25E" fill="transparent"/>
+                                <rect x="600" y="400" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="700" y="400" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="800" y="400" width="100" height="100" data-color="D064FA" fill="#262626"/>
+                                <rect x="900" y="400" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="1000" y="400" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="100" y="500" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="200" y="500" width="100" height="100" data-color="90398D" fill="#262626"/>
+                                <rect x="300" y="500" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="400" y="500" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="500" y="500" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="600" y="500" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="700" y="500" width="100" height="100" data-color="D064FA" fill="transparent"/>
+                                <rect x="800" y="500" width="100" height="100" data-color="90398D" fill="#262626"/>
+                                <rect x="900" y="500" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="300" y="600" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="400" y="600" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="500" y="600" width="100" height="100" data-color="F896FD" fill="transparent"/>
+                                <rect x="600" y="600" width="100" height="100" data-color="F896FD" fill="#262626"/>
+                                <rect x="700" y="600" width="100" height="100" data-color="90398D" fill="#262626"/>
+                                <rect x="100" y="700" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="200" y="700" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="400" y="700" width="100" height="100" data-color="90398D" fill="transparent"/>
+                                <rect x="500" y="700" width="100" height="100" data-color="90398D" fill="#262626"/>
+                                <rect x="600" y="700" width="100" height="100" data-color="90398D" fill="#262626"/>
+                                <rect x="800" y="700" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="900" y="700" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect y="800" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="100" y="800" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="200" y="800" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="300" y="800" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="400" y="800" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="500" y="800" width="100" height="100" data-color="80B96D" fill="#262626"/>
+                                <rect x="600" y="800" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="700" y="800" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="800" y="800" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="900" y="800" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="1000" y="800" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect y="900" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="100" y="900" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="200" y="900" width="100" height="100" data-color="80B96D" fill="transparent"/>
+                                <rect x="300" y="900" width="100" height="100" data-color="80B96D" fill="transparent"/>
+                                <rect x="400" y="900" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="500" y="900" width="100" height="100" data-color="80B96D" fill="transparent"/>
+                                <rect x="600" y="900" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="700" y="900" width="100" height="100" data-color="80B96D" fill="transparent"/>
+                                <rect x="800" y="900" width="100" height="100" data-color="80B96D" fill="transparent"/>
+                                <rect x="900" y="900" width="100" height="100" data-color="B6E281" fill="transparent"/>
+                                <rect x="1000" y="900" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="100" y="1000" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="200" y="1000" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="300" y="1000" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="400" y="1000" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="500" y="1000" width="100" height="100" data-color="49795A" fill="#262626"/>
+                                <rect x="600" y="1000" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="700" y="1000" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                <rect x="800" y="1000" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="900" y="1000" width="100" height="100" data-color="49795A" fill="transparent"/>
+                                <rect x="500" y="1100" width="100" height="100" data-color="24322D" fill="transparent"/>
+                                </svg>
+
+                        </div>
+                    </div>
+                </div>
+
+                <pre
+                    id="file-text"
+                    class="p-4 text-sm whitespace-pre-wrap hidden"
+                ></pre>
+
+                <img
+                    id="file-image"
+                    class="hidden max-w-full max-h-[70vh] mx-auto p-4 object-contain"
+                />
+            </div>
+
+            <div id="flower-container" class="absolute right-8 bottom-2 hidden">
+                <img src="assets/icons/flower.svg" alt="flower" class="h-24 opacity-60">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/hex.js"></script>
+</body>
+</html>
